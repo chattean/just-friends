@@ -1,5 +1,7 @@
 // import dependencies
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require('mongoose');
+const { search } = require('../routes');
+const Thought = require('./Thought');
 
 const UserSchema = new Schema({
     username:{
@@ -15,15 +17,30 @@ const UserSchema = new Schema({
         required: true,
         match: [/.+@.+\..+/, 'Please enter a valid email address'],
     }, 
-    thoughts:{
+    //array of Objects of Object IDs
+    thoughts:[{
         // reference the thought model
         // _id:
-        type: 
-    },
-    // Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
-    friends:{
+        type: Schema.Types.ObjectId,
+        ref: 'Thought',
+    },],
+    friends:[{
         //reference the User model (self reference)
-    }
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },],
+},
+// Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+{
+    toJSOn: {
+        virtuals:true,
+    },
+    id: false,
+}
+);
+
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length;
 })
 
 // create the User model using the UserSchema
