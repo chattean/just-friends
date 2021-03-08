@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const { search } = require('../routes');
 const Thought = require('./Thought');
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
     username:{
         type: String,
         unique: true,
@@ -44,6 +44,6 @@ userSchema.virtual('friendCount').get(function(){
 })
 
 // create the User model using the UserSchema
-const User = model('User', UserSchema );
+const User = model('User', userSchema );
 // export the User model
 module.exports = User;

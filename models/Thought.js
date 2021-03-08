@@ -1,7 +1,11 @@
 // import dependencies
 const { Schema, model } = require('mongoose')
+const moment = require('moment')
+const reactionSchema = require('./Reaction');
 
-const ThoughtSchema = new Schema ({
+var now = moment().toDate();
+
+const thoughtSchema = new Schema ({
     thoughtText: {
         type: String,
         //Validation for 1 to 280 chars
@@ -11,9 +15,11 @@ const ThoughtSchema = new Schema ({
         required:'Please leave a thought, the universe will give you a penny.'
     },
     // Use moment in the getter method to format the timestamp on query
+    // const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} at ${hour}:${minutes} ${periodOfDay}`;
     createdAt:{
         type: Date,
-        default: Date.now
+        default: Date.now,
+        $gte: now
     }, 
     username:{
         type: String,
@@ -39,6 +45,6 @@ thoughtSchema.virtual('reactionCount').get(function() {
   });
 
 // create the Thought model using the UserSchema
-const Thought = model('Thought', ThoughtSchema );
+const Thought = model('Thought', thoughtSchema );
 // export the Thought model
 module.exports = Thought;

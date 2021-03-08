@@ -27,9 +27,12 @@ router
 
 // Getting all the reaction for the Thought
 router
-  .route('/:thoughtId/reactions').post(createReaction);
+  .route('/:thoughtId/reactions')
+  .post(createReaction);
 
 //deleting the reaction using the ID for the Reaction. 
 router
-  .route('/:thoughtId/reactions/:reactionId').delete(deleteReaction)
+  .route('/:thoughtId/reactions/:reactionId')
+  .delete(deleteReaction)
+  
 module.exports = router;
