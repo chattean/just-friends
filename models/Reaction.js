@@ -2,6 +2,8 @@
 const { Schema, Types } = require('mongoose')
 const moment = require('moment')
 var now = moment().toDate();
+const dateFormat = require('../utils/dateFormat');
+
 
 //This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
 const reactionSchema = new Schema({
@@ -24,8 +26,7 @@ const reactionSchema = new Schema({
     createdAt:{
         type: Date,
         default: Date.now,
-        $gte: now
-
+        $gte: dateFormat(now)
     }, 
 }, 
 {

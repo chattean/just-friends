@@ -2,6 +2,7 @@
 const { Schema, model } = require('mongoose')
 const moment = require('moment')
 const reactionSchema = require('./Reaction');
+const dateFormat = require('../utils/dateFormat');
 
 var now = moment().toDate();
 
@@ -19,7 +20,7 @@ const thoughtSchema = new Schema ({
     createdAt:{
         type: Date,
         default: Date.now,
-        $gte: now
+        $gte: dateFormat(now)
     }, 
     username:{
         type: String,

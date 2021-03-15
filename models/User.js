@@ -1,7 +1,7 @@
 // import dependencies
 const { Schema, model } = require('mongoose');
-const { search } = require('../routes');
-const Thought = require('./Thought');
+// const { search } = require('../routes');
+// const Thought = require('./Thought');
 
 const userSchema = new Schema({
     username:{
